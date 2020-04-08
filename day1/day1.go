@@ -8,15 +8,44 @@ import (
 )
 
 func main() {
-	file, _ := ioutil.ReadFile("../input.txt")
-	modules := strings.Split(string(file), "\n")
+	file, err := ioutil.ReadFile("../input.txt")
 
-	var total int
-
-	for _, element := range modules {
-		var fuel, _ = strconv.Atoi(element)
-		total += int(fuel / 3) - 2
+	if err != nil {
+		panic(err)
 	}
 
-	fmt.Print(total)
+	modules := strings.Split(string(file), "\n")
+
+	var totalFuel int
+
+	for _, element := range modules {
+		var mass, _ = strconv.Atoi(element)
+		var requiredFuel = getRequiredFuel(mass)
+
+		totalFuel += requiredFuel
+	}
+
+	fmt.Println(totalFuel)
+}
+
+func getRequiredFuel(mass int) int {
+	var fuel = getFuelByMass(mass);
+	var remainingMass = fuel
+
+	for remainingMass > 0 {
+		var additionalFuel = getFuelByMass(remainingMass)
+
+		if additionalFuel <= 0 {
+			break
+		}
+
+		fuel += additionalFuel;
+		remainingMass = additionalFuel
+	}
+
+	return fuel;
+}
+
+func getFuelByMass(mass int) int {
+	return int(mass / 3) - 2
 }
