@@ -2,25 +2,15 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"strings"
-	"strconv"
+	"modules"
 )
 
 func main() {
-	file, err := ioutil.ReadFile("../input.txt")
-
-	if err != nil {
-		panic(err)
-	}
-
-	modules := strings.Split(string(file), "\n")
-
+	modules := modules.GetModules()
 	var totalFuel int
 
 	for _, element := range modules {
-		var mass, _ = strconv.Atoi(element)
-		var requiredFuel = getRequiredFuel(mass)
+		var requiredFuel = getRequiredFuel(element)
 
 		totalFuel += requiredFuel
 	}
@@ -29,7 +19,7 @@ func main() {
 }
 
 func getRequiredFuel(mass int) int {
-	var fuel = getFuelByMass(mass);
+	var fuel = getFuelByMass(mass)
 	var remainingMass = fuel
 
 	for remainingMass > 0 {
@@ -39,13 +29,13 @@ func getRequiredFuel(mass int) int {
 			break
 		}
 
-		fuel += additionalFuel;
+		fuel += additionalFuel
 		remainingMass = additionalFuel
 	}
 
-	return fuel;
+	return fuel
 }
 
 func getFuelByMass(mass int) int {
-	return int(mass / 3) - 2
+	return int(mass/3) - 2
 }
