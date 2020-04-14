@@ -5,3 +5,6 @@ Go uses two environment varialbes for package resolution: GOROOT (where the GO S
 
 - https://medium.com/rungo/everything-you-need-to-know-about-packages-in-go-b8bac62b74cc
 - https://blog.learngoprogramming.com/what-are-goroot-and-gopath-1231b084723f
+
+## S/Print
+- https://golang.org/pkg/fmt/
