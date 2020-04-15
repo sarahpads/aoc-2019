@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"modules"
+	"utils"
 )
 
 func main() {
-	modules := modules.GetModules()
+	modules := utils.GetInput("src/day1/input.txt")
 	var totalFuel int
 
 	for _, element := range modules {
@@ -39,3 +39,5 @@ func getRequiredFuel(mass int) int {
 func getFuelByMass(mass int) int {
 	return int(mass/3) - 2
 }
+
+// 5093620
