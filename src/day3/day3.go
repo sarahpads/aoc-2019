@@ -86,46 +86,29 @@ func addPath(position *Coord, coords *map[Coord]bool, command string) {
 	direction := Direction(test[1])
 	distance, _ := strconv.Atoi(test[2])
 
-	switch direction {
-	case UP:
-		var target int = position.Y + distance
+	var i int = 0
 
-		for i := position.Y; i < target; i++ {
-			var point = Coord{position.X, i}
-			(*coords)[point] = true
+	for i < distance {
+		point := *position
+
+		switch direction {
+		case UP:
+			point.Y += 1
+
+		case RIGHT:
+			point.X += 1
+
+		case DOWN:
+			point.Y -= 1
+
+		case LEFT:
+			point.X -= 1
 		}
 
-		(*position).Y = target
+		(*coords)[point] = true
+		(*position) = point
 
-	case RIGHT:
-		var target int = position.X + distance
-
-		for i := position.X; i < target; i++ {
-			var point = Coord{i, position.Y}
-			(*coords)[point] = true
-		}
-
-		(*position).X = target
-
-	case DOWN:
-		var target int = position.Y - distance
-
-		for i := position.Y; i > target; i-- {
-			var point = Coord{position.X, i}
-			(*coords)[point] = true
-		}
-
-		(*position).Y = target
-
-	case LEFT:
-		var target int = position.X - distance
-
-		for i := position.X; i > target; i-- {
-			var point = Coord{i, position.Y}
-			(*coords)[point] = true
-		}
-
-		(*position).X = target
+		i++
 	}
 }
 
